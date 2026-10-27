@@ -1,0 +1,100 @@
+/* ==========================================================
+   ScrollToggle — sticky floating top/bottom button
+   ========================================================== */
+.scroll-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  color: var(--color-on-brand);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease;
+}
+
+.scroll-toggle__icon {
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+}
+
+.scroll-toggle__icon svg {
+  width: 22px;
+  height: 22px;
+  animation: 1.6s ease-in-out infinite;
+}
+
+/* down cue bobs downward, up cue bobs upward */
+.scroll-toggle.is-down .scroll-toggle__icon svg {
+  animation-name: scroll-toggle-bob-down;
+}
+
+.scroll-toggle.is-up .scroll-toggle__icon svg {
+  animation-name: scroll-toggle-bob-up;
+}
+
+@keyframes scroll-toggle-bob-down {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes scroll-toggle-bob-up {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.scroll-toggle:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   HOVER (mouse devices only)
+   ========================================================== */
+@media (hover: hover) {
+  .scroll-toggle:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ==========================================================
+   LARGER VIEWPORTS
+   ========================================================== */
+@media (min-width: 768px) {
+  .scroll-toggle {
+    right: 26px;
+    bottom: 26px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-toggle,
+  .scroll-toggle__icon svg {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,290 @@
+/* ==========================================================
+   BLOG CARD — immersive: full image, text over gradient
+   ========================================================== */
+.blog-card {
+  height: 100%;
+}
+
+.blog-card__link {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 420px;
+  padding: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  background: #0f0b2a;
+  border-radius: var(--radius-lg, 20px);
+  box-shadow: 0 20px 40px -28px rgba(8, 10, 30, 0.7);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.blog-card__link:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+/* ---------- Background image ---------- */
+.blog-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+/* Force the image to fill the whole card, whatever ArticleImage's ratio is */
+.blog-card__media .blog-card__image,
+.blog-card__media .blog-card__image > * {
+  width: 100%;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+
+.blog-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark gradient so white text always reads */
+.blog-card__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(8, 6, 26, 0.45) 0%, transparent 28%),
+    linear-gradient(0deg, rgba(8, 6, 26, 0.95) 0%, rgba(8, 6, 26, 0.75) 38%, transparent 70%);
+  transition: opacity 0.4s ease;
+}
+
+/* Brand glow that fades in on hover */
+.blog-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(236, 72, 153, 0.45) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* ---------- Top row ---------- */
+.blog-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.blog-card__cat {
+  max-width: 70%;
+  padding: 6px 12px;
+  overflow: hidden;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 999px;
+}
+
+.blog-card__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.blog-card__time svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ---------- Bottom content ---------- */
+.blog-card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  text-wrap: balance;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Excerpt: hidden on desktop, slides open on hover (grid-rows trick) */
+.blog-card__reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+}
+
+.blog-card__excerpt {
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.blog-card__excerpt::before {
+  content: '';
+  display: block;
+  height: 10px;
+}
+
+.blog-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.blog-card__date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.blog-card__date svg {
+  width: 13px;
+  height: 13px;
+}
+
+.blog-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 8px 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f0b2a;
+  background: #ffffff;
+  border-radius: 999px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.blog-card__cta svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.blog-card__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   HOVER (mouse devices only)
+   ========================================================== */
+@media (hover: hover) {
+  .blog-card__link:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 50px -28px rgba(236, 72, 153, 0.6);
+  }
+
+  .blog-card__link:hover .blog-card__media img {
+    transform: scale(1.08);
+  }
+
+  .blog-card__link:hover::after {
+    opacity: 1;
+  }
+
+  .blog-card__link:hover .blog-card__reveal {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .blog-card__link:hover .blog-card__cta {
+    color: #ffffff;
+    background: var(--grad-brand, var(--color-brand));
+  }
+
+  .blog-card__link:hover .blog-card__cta svg {
+    transform: rotate(45deg);
+  }
+}
+
+/* Touch screens: no hover, so always show the excerpt */
+@media (hover: none) {
+  .blog-card__reveal {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .blog-card__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+@media (max-width: 640px) {
+  .blog-card__link {
+    min-height: 360px;
+    padding: 16px;
+  }
+
+  .blog-card__title {
+    font-size: 1.18rem;
+  }
+
+  .blog-card__excerpt {
+    font-size: 0.86rem;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .blog-card__link,
+  .blog-card__link::after,
+  .blog-card__media img,
+  .blog-card__reveal,
+  .blog-card__cta,
+  .blog-card__cta svg {
+    transition: none;
+  }
+}

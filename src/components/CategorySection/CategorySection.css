@@ -1,0 +1,105 @@
+.category-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 32px;
+}
+
+/* Eyebrow as a small pill tag with a leading dot */
+.category-section .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-dark);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.category-section .eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+
+.category-section__title {
+  margin-top: 10px;
+  font-size: clamp(1.6rem, 1.25rem + 1.3vw, 2.15rem);
+  letter-spacing: -0.02em;
+}
+
+.category-section__description {
+  margin-top: 8px;
+  max-width: 620px;
+  color: var(--color-muted);
+}
+
+/* ==========================================================
+   "View all" — clean outline pill, fills with ink on hover
+   ========================================================== */
+.category-section__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--color-ink);
+  background: transparent;
+  border: 1px solid var(--color-border-strong, var(--color-border));
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.category-section__action-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.category-section__action:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .category-section__action:hover {
+    color: var(--color-surface, #ffffff);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+
+  .category-section__action:hover .category-section__action-icon {
+    transform: translateX(4px);
+  }
+}
+
+.category-section__action:active {
+  transform: translateY(1px);
+}
+
+/* Small phones: keep it compact */
+@media (max-width: 480px) {
+  .category-section__action {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-section__action,
+  .category-section__action-icon {
+    transition: none;
+  }
+}
